@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  gft.technicaltest:
+    image: ${DOCKER_REGISTRY-}gfttechnicaltest
+    build:
+      context: .
+      dockerfile: GFT.TechnicalTest/Dockerfile
+
+    ports:
+      - "8000:80"
+      - "8443:443"
+
+    depends_on:
+      - sqldata
+
+  sqldata:
+    image: "mcr.microsoft.com/mssql/server"
+
+    environment:
+      SA_PASSWORD: "test-database"
+      ACCEPT_EULA: "Y"
+
+    ports:
+      - "5434:1433"
