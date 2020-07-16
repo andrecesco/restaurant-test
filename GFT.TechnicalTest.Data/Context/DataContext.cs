@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GFT.TechnicalTest.Data.Context
 {
-    public sealed class TechnicalTestContext : DbContext
+    public sealed class DataContext : DbContext, IDataContext
     {
         #region Dishes
         public DbSet<Order> Orders { get; set; }
         #endregion
 
         #region Constructors
-        public TechnicalTestContext(DbContextOptions<TechnicalTestContext> options)
+        public DataContext(DbContextOptions<DataContext> options)
            : base(options)
         {
         }
@@ -21,12 +21,7 @@ namespace GFT.TechnicalTest.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder
-            #region Dishes
-                .BuildOrder()
-            #endregion
-                ;
+            modelBuilder.BuildOrder();
         }
         #endregion
     }

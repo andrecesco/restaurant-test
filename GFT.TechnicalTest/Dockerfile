@@ -16,8 +16,8 @@ RUN apt-get install -y nodejs
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["GFT.TechnicalTest/GFT.TechnicalTest.csproj", "GFT.TechnicalTest/"]
-COPY ["../GFT.TechnicalTest.Data/GFT.TechnicalTest.Data.csproj", "../GFT.TechnicalTest.Data/"]
+COPY ["../GFT.TechnicalTest/GFT.TechnicalTest.csproj", "GFT.TechnicalTest/"]
+COPY ["../GFT.TechnicalTest.Data/GFT.TechnicalTest.Data.csproj", "GFT.TechnicalTest.Data/"]
 RUN dotnet restore "GFT.TechnicalTest/GFT.TechnicalTest.csproj"
 COPY . .
 WORKDIR "/src/GFT.TechnicalTest"

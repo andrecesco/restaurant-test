@@ -9,6 +9,11 @@ namespace GFT.TechnicalTest.Resources
         private static readonly CultureInfo cultureInfo = CultureInfo.InvariantCulture;
         #endregion
 
+        public static string GetException(string key)
+        {
+            return GetMessage(Exceptions.ResourceManager, key);
+        }
+
         public static string GetTag(string key)
         {
             return GetMessage(QueryTag.ResourceManager, key);

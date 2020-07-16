@@ -37,9 +37,11 @@ namespace GFT.TechnicalTest
         {
             services.AddOptions();
 
-            services.AddDbContext<TechnicalTestContext>(options =>
+            services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(this.Configuration.GetConnectionString(CONNECTION_STRING_PROP_NAME),
                                   b => b.MigrationsAssembly(MIGRATIONS_ASSEMBLY)), ServiceLifetime.Transient);
+
+            services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
 
             services.AddSingleton(this.Configuration)
                     .AddHttpClient()
