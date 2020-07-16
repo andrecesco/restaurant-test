@@ -25,15 +25,6 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Validations
                 .NotNull()
                 .WithErrorCode(ErrorCodes.Dishes);
             #endregion
-
-            #region Dishes Items
-            this.RuleForEach(m => m.Dishes)
-                .GreaterThanOrEqualTo(1)
-                .WithErrorCode(ErrorCodes.Dishes)
-
-                .LessThanOrEqualTo(3)
-                .WithErrorCode(ErrorCodes.Dishes);
-            #endregion
         }
         #endregion
     }

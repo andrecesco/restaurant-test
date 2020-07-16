@@ -61,6 +61,15 @@ namespace GFT.TechnicalTest.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No dishes found.
+        /// </summary>
+        public static string MorningOrderService_001 {
+            get {
+                return ResourceManager.GetString("MorningOrderService-001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must be a valid Period.
         /// </summary>
         public static string Order_001 {

@@ -1,12 +1,12 @@
 ﻿using GFT.TechnicalTest.Data.Models.Dishes;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GFT.TechnicalTest.Data.Context
 {
     public interface IDataContext
     {
         #region Dishes
-        public DbSet<Order> Orders { get; set; }
+        public IQueryable<Order> Orders { get; }
         #endregion
     }
 }

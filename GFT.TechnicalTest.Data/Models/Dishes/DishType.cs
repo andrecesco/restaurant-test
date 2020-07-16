@@ -7,7 +7,7 @@
     {
         Entree = 0,
         Side = 1,
-        Drinks = 2,
+        Drink = 2,
         Dessert = 3
     }
 }

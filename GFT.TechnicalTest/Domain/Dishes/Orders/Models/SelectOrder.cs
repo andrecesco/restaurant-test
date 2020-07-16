@@ -12,5 +12,12 @@
         /// <example>Eggs, toast, coffee(x3)</example>
         public string Data { get; set; }
         #endregion
+
+        #region Overrides
+        public override string ToString()
+        {
+            return this.Data.ToLowerInvariant();
+        }
+        #endregion
     }
 }

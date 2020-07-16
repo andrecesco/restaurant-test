@@ -3,7 +3,7 @@
     public sealed class Order
     {
         #region Properties
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public DishType DishType { get; set; }
 

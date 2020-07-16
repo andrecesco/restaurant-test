@@ -12,7 +12,7 @@ namespace GFT.TechnicalTest.Data.Context.Builders.Dishes
             builder.HasKey(m => m.Id);
 
             builder.Property(p => p.Id)
-                   .HasMaxLength(65)
+                   .UseIdentityColumn()
                    .IsRequired();
 
             builder.Property(p => p.DishType)

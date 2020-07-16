@@ -11,7 +11,7 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Controllers
     public sealed class OrdersControllerTest
     {
         [Test]
-        public void SelectOrders_OrderCreation_EmptyFails()
+        public void MakeOrder_Empty_Fails()
         {
             CreateOrder payload = null;
             var validatorMock = new Mock<IValidator<CreateOrder>>();
@@ -24,7 +24,7 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Controllers
         }
 
         [Test]
-        public void SelectOrders_OrderCreation_CallsValidator()
+        public void MakeOrder_ValidData_CallsValidator()
         {
             var payload = new CreateOrder();
             var validatorMock = new Mock<IValidator<CreateOrder>>();
