@@ -62,11 +62,6 @@
           <AutoGen>True</AutoGen>
           <DependentUpon>Exceptions.resx</DependentUpon>
         </Compile>
-        <Compile Update="Resources\QueryTag.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>QueryTag.resx</DependentUpon>
-        </Compile>
     </ItemGroup>
 
     <ItemGroup>

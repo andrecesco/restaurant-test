@@ -14,11 +14,6 @@ namespace GFT.TechnicalTest.Resources
             return GetMessage(Exceptions.ResourceManager, key);
         }
 
-        public static string GetTag(string key)
-        {
-            return GetMessage(QueryTag.ResourceManager, key);
-        }
-
         private static string GetMessage(ResourceManager manager, string key)
         {
             return manager.GetString(key, cultureInfo);

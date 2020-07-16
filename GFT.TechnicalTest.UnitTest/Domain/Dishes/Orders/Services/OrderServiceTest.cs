@@ -11,12 +11,12 @@ using System.Linq;
 namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
 {
     [TestFixture]
-    public sealed class MorningOrderServiceTest
+    public sealed class OrderServiceTest
     {
         #region Properties
         private Mock<IDataContext> ContextMock { get; set; }
 
-        private MorningOrderService Subject { get; set; }
+        private OrderService Subject { get; set; }
         #endregion
 
         #region Setup
@@ -24,7 +24,7 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
         public void SetUp()
         {
             this.ContextMock = new Mock<IDataContext>(); ;
-            this.Subject = new MorningOrderService(this.ContextMock.Object);
+            this.Subject = new OrderService(this.ContextMock.Object);
         }
         #endregion
 
@@ -37,13 +37,6 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
         }
 
         [Test]
-        public void MakeOrder_NightPeriod_Fails()
-        {
-            var payload = new CreateOrder { Period = Period.Night };
-            Assert.Throws<InvalidOperationException>(() => this.Subject.MakeOrder(payload));
-        }
-
-        [Test]
         public void MakeOrder_Empty_Fails()
         {
             var payload = new CreateOrder { Period = Period.Morning, Dishes = new int[] { } };
@@ -52,14 +45,19 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
         #endregion
 
         #region Outputs
-        [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = "eggs, toast, coffee")]
-        [TestCase(new int[] { 2, 1, 3 }, ExpectedResult = "eggs, toast, coffee")]
-        [TestCase(new int[] { 1, 2, 3, 4 }, ExpectedResult = "eggs, toast, coffee, error")]
-        [TestCase(new int[] { 1, 2, 3, 3, 3 }, ExpectedResult = "eggs, toast, coffee(x3)")]
-        public string MakeOrder_Data_Outputs(int[] dishesData)
+        [TestCase(Period.Morning, new int[] { 1, 2, 3 }, ExpectedResult = "eggs, toast, coffee")]
+        [TestCase(Period.Morning, new int[] { 2, 1, 3 }, ExpectedResult = "eggs, toast, coffee")]
+        [TestCase(Period.Morning, new int[] { 1, 2, 3, 4 }, ExpectedResult = "eggs, toast, coffee, error")]
+        [TestCase(Period.Morning, new int[] { 1, 2, 3, 3, 3 }, ExpectedResult = "eggs, toast, coffee(x3)")]
+
+        [TestCase(Period.Night, new int[] { 1, 2, 3, 4 }, ExpectedResult = "steak, potato, wine, cake")]
+        [TestCase(Period.Night, new int[] { 1, 2, 2, 4 }, ExpectedResult = "steak, potato(x2), cake")]
+        [TestCase(Period.Night, new int[] { 1, 2, 3, 5 }, ExpectedResult = "steak, potato, wine, error")]
+        [TestCase(Period.Night, new int[] { 1, 1, 2, 3, 5 }, ExpectedResult = "steak, error")]
+        public string MakeOrder_Data_Outputs(Period period, int[] dishesData)
         {
             this.MockContextData();
-            var payload = new CreateOrder { Period = Period.Morning, Dishes = dishesData };
+            var payload = new CreateOrder { Period = period, Dishes = dishesData };
 
             var result = this.Subject.MakeOrder(payload);
 
@@ -74,7 +72,12 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
             var data = new List<Order> {
                 new Order{ Id=1, Period = Period.Morning, DishType = DishType.Entree, Name="eggs" },
                 new Order{ Id=2, Period = Period.Morning, DishType = DishType.Side, Name="Toast" },
-                new Order{ Id=3, Period = Period.Morning, DishType = DishType.Drink, Name="coffee", Multiple = true }
+                new Order{ Id=3, Period = Period.Morning, DishType = DishType.Drink, Name="coffee", Multiple = true },
+
+                new Order{ Id=1, Period = Period.Night, DishType = DishType.Entree, Name="steak" },
+                new Order{ Id=2, Period = Period.Night, DishType = DishType.Side, Name="potato", Multiple = true },
+                new Order{ Id=3, Period = Period.Night, DishType = DishType.Drink, Name="wine" },
+                new Order{ Id=4, Period = Period.Night, DishType = DishType.Dessert, Name="cake" }
             };
 
             this.ContextMock.Setup(v => v.Orders)

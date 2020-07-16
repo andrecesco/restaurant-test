@@ -8,6 +8,8 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Models
         public string Name { get; set; }
 
         public int Count { get; set; }
+
+        public bool AllowMultiple { get; set; }
         #endregion
 
         #region Overrides
@@ -15,7 +17,7 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Models
         {
             var result = new StringBuilder(this.Name);
 
-            if (this.Count > 1)
+            if (this.Count > 1 && this.AllowMultiple)
             {
                 result.Append($"(x{this.Count})");
             }
