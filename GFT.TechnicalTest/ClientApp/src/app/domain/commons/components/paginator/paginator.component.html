@@ -1,0 +1,18 @@
+<nav *ngIf="data && data.size">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"
+        *ngIf="hasPreviousPage()"
+        (click)="goPreviousPage()">
+
+      <span class="page-link">Previous</span>
+    </li>
+
+    <li class="page-item" *ngIf="hasNextPage() || hasPreviousPage()">
+      <span class="page-link">{{getCurrentStatus()}}</span>
+    </li>
+
+    <li class="page-item" *ngIf="hasNextPage()" (click)="goNextPage()">
+      <span class="page-link">Next</span>
+    </li>
+  </ul>
+</nav>
