@@ -47,10 +47,7 @@ namespace GFT.TechnicalTest
                     .AddHttpClient()
                     .AddControllers()
                     .AddControllersAsServices()
-                    .AddFluentValidation(c =>
-                    {
-                        c.RegisterValidatorsFromAssemblyContaining<Startup>();
-                    })
+                    .AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<Startup>())
                     .AddNewtonsoftJson(options =>
                     {
                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -60,7 +57,7 @@ namespace GFT.TechnicalTest
             services.AddControllersWithViews();
 
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
-            services.AddSwagger(this.Configuration);
+            services.AddSwagger();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -98,12 +95,9 @@ namespace GFT.TechnicalTest
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
+            app.UseEndpoints(endpoints => endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+                    pattern: "{controller}/{action=Index}/{id?}"));
 
             app.UseSpa(spa =>
             {
