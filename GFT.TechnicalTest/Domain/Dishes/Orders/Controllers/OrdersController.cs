@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using GFT.TechnicalTest.Domain.Dishes.Orders.Models;
+using GFT.TechnicalTest.Domain.Dishes.Orders.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,20 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     public sealed class OrdersController : ControllerBase
     {
+        #region Properties
         private IValidator<CreateOrder> CreateValidator { get; }
 
-        public OrdersController(IValidator<CreateOrder> createValidator)
+        private IOrderService OrderService { get; }
+        #endregion
+
+        #region Constructors
+        public OrdersController(IValidator<CreateOrder> createValidator,
+            IOrderService orderService)
         {
             this.CreateValidator = createValidator;
-
+            this.OrderService = orderService;
         }
+        #endregion
 
         /// <summary>
         /// Creates a new Order and returns the result
@@ -43,11 +51,7 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Controllers
                 return this.BadRequest(validationResult);
             }
 
-            var result = new SelectOrder
-            {
-                Data = "teste"
-            };
-
+            var result = this.OrderService.MakeOrder(createOrder);
             return this.Ok(result);
         }
     }
