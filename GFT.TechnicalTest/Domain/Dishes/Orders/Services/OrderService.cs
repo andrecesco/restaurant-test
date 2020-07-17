@@ -39,15 +39,8 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Services
                 throw new ArgumentException(MessageManager.GetException("OrderService-001"));
             }
 
-            var orders = this.SelectOrders(createModel);
-
-            var dataGroups = createModel.Dishes
-                                        .OrderBy(id => id)
-                                        .GroupBy(key => key, item => item)
-                                        .Select(g => BuildGroup(orders, g));
-
-            var data = ProcessGroups(dataGroups).Select(b => b.ToString())
-                                                .ToList();
+            var orders = this.ProcessOrderGroup(createModel);
+            var data = ProcessGroups(orders);
 
             var content = string.Join(Separator, data);
             return new SelectOrder { Data = content };
@@ -64,36 +57,49 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Services
                        .ToList();
         }
 
-        private static OrderGroup BuildGroup(IEnumerable<Order> orders, IGrouping<int, int> idGroup)
+        private IEnumerable<IEnumerable<ProcessingOrder>> ProcessOrderGroup(CreateOrder createModel)
         {
-            var groupKey = idGroup.Key;
-            var correspondingOrder = orders.FirstOrDefault(o => o.Id.Equals(groupKey));
+            var orders = this.SelectOrders(createModel);
 
-            return new OrderGroup(correspondingOrder, idGroup);
+            var dataGroups = createModel.Dishes
+                                        .OrderBy(id => id)
+                                        .GroupBy(key => key, item => item);
+
+            var result = new List<IEnumerable<ProcessingOrder>>(dataGroups.Count());
+
+            foreach (var idGroup in dataGroups)
+            {
+                var groupKey = idGroup.Key;
+                var correspondingOrder = orders.FirstOrDefault(o => o.Id.Equals(groupKey));
+
+                var item = new OrderGroup(correspondingOrder, idGroup);
+
+                if (!(item is null))
+                {
+                    var processed = item.Process();
+                    result.Add(processed);
+                }
+            }
+
+            return result;
         }
 
-        private static IEnumerable<ProcessingOrder> ProcessGroups(IEnumerable<OrderGroup> orderGroups)
+        private static IEnumerable<string> ProcessGroups(IEnumerable<IEnumerable<ProcessingOrder>> orderGroups)
         {
             var result = new List<ProcessingOrder>(orderGroups.Count());
 
-            foreach (var orderGroup in orderGroups)
+            foreach (var group in orderGroups)
             {
-                var processed = orderGroup.Process();
+                result.AddRange(group);
 
-                if (processed is null)
-                {
-                    break;
-                }
-
-                result.AddRange(processed);
-
-                if (processed.Any(p => p.Name.Equals(ErrorName)))
+                if (group.Any(p => p.Name.Equals(ErrorName)))
                 {
                     break;
                 }
             }
 
-            return result;
+            return result.Select(b => b.ToString())
+                         .ToList();
         }
     }
 }
