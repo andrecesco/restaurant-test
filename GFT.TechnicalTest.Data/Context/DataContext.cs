@@ -8,9 +8,9 @@ namespace GFT.TechnicalTest.Data.Context
     public sealed class DataContext : DbContext, IDataContext
     {
         #region Dishes
-        private DbSet<Order> OrdersSet { get; set; }
+        private DbSet<Dish> DishSet { get; set; }
 
-        public IQueryable<Order> Orders => this.OrdersSet;
+        public IQueryable<Dish> Dishes => this.DishSet;
         #endregion
 
         #region Constructors
@@ -24,7 +24,7 @@ namespace GFT.TechnicalTest.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.BuildOrder();
+            modelBuilder.BuildDish();
         }
         #endregion
     }

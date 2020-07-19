@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GFT.TechnicalTest.Data.Context.Builders.Dishes
 {
-    public static class OrderBuilder
+    public static class DishBuilder
     {
-        public static ModelBuilder BuildOrder(this ModelBuilder modelBuilder)
+        public static ModelBuilder BuildDish(this ModelBuilder modelBuilder)
         {
-            var builder = DishesModelBuilder.Build<Order>(modelBuilder);
+            var builder = DishesModelBuilder.Build<Dish>(modelBuilder);
 
-            builder.HasKey(m => m.Id);
+            builder.HasKey(m => new { m.Id, m.Period });
 
             builder.Property(p => p.Id)
                    .UseIdentityColumn()

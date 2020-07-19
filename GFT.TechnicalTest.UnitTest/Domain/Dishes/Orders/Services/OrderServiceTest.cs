@@ -69,18 +69,18 @@ namespace GFT.TechnicalTest.UnitTest.Domain.Dishes.Orders.Services
         #region Mock Data
         private void MockContextData()
         {
-            var data = new List<Order> {
-                new Order{ Id=1, Period = Period.Morning, DishType = DishType.Entree, Name="eggs" },
-                new Order{ Id=2, Period = Period.Morning, DishType = DishType.Side, Name="Toast" },
-                new Order{ Id=3, Period = Period.Morning, DishType = DishType.Drink, Name="coffee", Multiple = true },
+            var data = new List<Dish> {
+                new Dish{ Id=1, Period = Period.Morning, DishType = DishType.Entree, Name="eggs" },
+                new Dish{ Id=2, Period = Period.Morning, DishType = DishType.Side, Name="Toast" },
+                new Dish{ Id=3, Period = Period.Morning, DishType = DishType.Drink, Name="coffee", Multiple = true },
 
-                new Order{ Id=1, Period = Period.Night, DishType = DishType.Entree, Name="steak" },
-                new Order{ Id=2, Period = Period.Night, DishType = DishType.Side, Name="potato", Multiple = true },
-                new Order{ Id=3, Period = Period.Night, DishType = DishType.Drink, Name="wine" },
-                new Order{ Id=4, Period = Period.Night, DishType = DishType.Dessert, Name="cake" }
+                new Dish{ Id=1, Period = Period.Night, DishType = DishType.Entree, Name="steak" },
+                new Dish{ Id=2, Period = Period.Night, DishType = DishType.Side, Name="potato", Multiple = true },
+                new Dish{ Id=3, Period = Period.Night, DishType = DishType.Drink, Name="wine" },
+                new Dish{ Id=4, Period = Period.Night, DishType = DishType.Dessert, Name="cake" }
             };
 
-            this.ContextMock.Setup(v => v.Orders)
+            this.ContextMock.Setup(v => v.Dishes)
                             .Returns(data.AsQueryable());
         }
         #endregion

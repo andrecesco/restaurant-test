@@ -18,14 +18,14 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Models
 
         public int Key { get; private set; }
 
-        public Order Order { get; }
+        public Dish Order { get; }
 
         public bool AllowMultiple => !(this.Order is null)
                 && this.Order.Multiple.Equals(true);
         #endregion
 
         #region Constructors
-        public OrderGroup(Order order, IGrouping<int, int> grouping)
+        public OrderGroup(Dish order, IGrouping<int, int> grouping)
         {
             if (grouping is null)
             {

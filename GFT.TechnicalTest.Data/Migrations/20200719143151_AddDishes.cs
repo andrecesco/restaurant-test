@@ -4,7 +4,7 @@
 #pragma warning disable IDE0058 // Expression value is never used
 namespace GFT.TechnicalTest.Data.Migrations
 {
-    public partial class AddOrder : Migration
+    public partial class AddDishes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,26 +12,25 @@ namespace GFT.TechnicalTest.Data.Migrations
                 name: "Dishes");
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Dish",
                 schema: "Dishes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DishType = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
                     Period = table.Column<int>(nullable: false),
+                    DishType = table.Column<int>(nullable: false),
                     Multiple = table.Column<bool>(nullable: false, defaultValue: false),
                     Name = table.Column<string>(maxLength: 6, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Dish", x => new { x.Id, x.Period });
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_DishType_Period",
+                name: "IX_Dish_DishType_Period",
                 schema: "Dishes",
-                table: "Order",
+                table: "Dish",
                 columns: new[] { "DishType", "Period" },
                 unique: true);
         }
@@ -39,7 +38,7 @@ namespace GFT.TechnicalTest.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order",
+                name: "Dish",
                 schema: "Dishes");
         }
     }

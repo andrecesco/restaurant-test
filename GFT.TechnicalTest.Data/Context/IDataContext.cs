@@ -6,7 +6,7 @@ namespace GFT.TechnicalTest.Data.Context
     public interface IDataContext
     {
         #region Dishes
-        public IQueryable<Order> Orders { get; }
+        public IQueryable<Dish> Dishes { get; }
         #endregion
     }
 }

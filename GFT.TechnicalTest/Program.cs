@@ -1,5 +1,8 @@
 using Autofac.Extensions.DependencyInjection;
+using GFT.TechnicalTest.Data.Context;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace GFT.TechnicalTest
@@ -8,7 +11,10 @@ namespace GFT.TechnicalTest
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            ExecuteMigrations(host);
+
+            host.Run();
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
@@ -19,6 +25,14 @@ namespace GFT.TechnicalTest
                             webBuilder
                                 .ConfigureKestrel(k => k.AddServerHeader = false)
                                 .UseStartup<Startup>());
+        }
+
+        private static void ExecuteMigrations(IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+
+            db.Database.Migrate();
         }
     }
 }

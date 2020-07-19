@@ -12,13 +12,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace GFT.TechnicalTest
 {
     public sealed class Startup
     {
         #region Constants
-        private const string CONNECTION_STRING_PROP_NAME = "gft_technicaltest.data";
+        private const string CONNECTION_STRING_PROP_NAME = "DB_CONNECTION_STRING";
         private const string MIGRATIONS_ASSEMBLY = "GFT.TechnicalTest.Data";
         #endregion
 
@@ -35,11 +36,17 @@ namespace GFT.TechnicalTest
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Environment.GetEnvironmentVariable(CONNECTION_STRING_PROP_NAME);
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                connectionString = this.Configuration.GetConnectionString(CONNECTION_STRING_PROP_NAME);
+            }
+
             services.AddOptions();
 
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString(CONNECTION_STRING_PROP_NAME),
-                                  b => b.MigrationsAssembly(MIGRATIONS_ASSEMBLY)), ServiceLifetime.Transient);
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly(MIGRATIONS_ASSEMBLY)), ServiceLifetime.Transient);
 
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
 

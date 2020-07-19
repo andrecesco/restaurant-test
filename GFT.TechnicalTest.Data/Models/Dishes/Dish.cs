@@ -1,6 +1,6 @@
 ﻿namespace GFT.TechnicalTest.Data.Models.Dishes
 {
-    public sealed class Order
+    public sealed class Dish
     {
         #region Properties
         public int Id { get; set; }

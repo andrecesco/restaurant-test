@@ -3,6 +3,20 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <NeutralLanguage>en-US</NeutralLanguage>
     </PropertyGroup>
+    <ItemGroup>
+      <Compile Remove="Migrations\20200717012948_AddOrder.cs" />
+      <Compile Remove="Migrations\20200717012948_AddOrder.Designer.cs" />
+      <Compile Remove="Migrations\20200717013030_AddOrderSeeds.cs" />
+      <Compile Remove="Migrations\20200717013030_AddOrderSeeds.Designer.cs" />
+      <Compile Remove="Migrations\20200719025317_Initial.cs" />
+      <Compile Remove="Migrations\20200719025317_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20200719025336_SeedData.cs" />
+      <Compile Remove="Migrations\20200719025336_SeedData.Designer.cs" />
+      <Compile Remove="Migrations\20200719025523_FixOrderId.cs" />
+      <Compile Remove="Migrations\20200719025523_FixOrderId.Designer.cs" />
+      <Compile Remove="Migrations\20200719025540_SeedData.cs" />
+      <Compile Remove="Migrations\20200719025540_SeedData.Designer.cs" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Autofac" Version="5.2.0" />
@@ -21,5 +35,6 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.6" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     </ItemGroup>
 </Project>

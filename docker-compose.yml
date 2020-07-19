@@ -1,25 +1,51 @@
-version: '3.4'
+version: '3.8'
 
 services:
   gft.technicaltest:
+    depends_on:
+      - database
+
     image: ${DOCKER_REGISTRY-}gfttechnicaltest
+    container_name: gft.technicaltest
+    restart: always
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - DB_CONNECTION_STRING=Server=database;Database=gft-data;User Id=SA;Password=Passw0rd(!)
+      
+    ports:
+      - "80"
+      - "443"
+
     build:
       context: .
       dockerfile: GFT.TechnicalTest/Dockerfile
 
-    ports:
-      - "8000:80"
-      - "8443:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
-    depends_on:
-      - sqldata
-
-  sqldata:
-    image: "mcr.microsoft.com/mssql/server"
-
-    environment:
-      SA_PASSWORD: "test-database"
-      ACCEPT_EULA: "Y"
+  database:
+    image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04
+    container_name: sqlserver
 
     ports:
-      - "5434:1433"
+      - "1433:1433"
+
+    environment: 
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Passw0rd(!)
+      - MSSQL_SA_PASSWORD=Passw0rd(!)
+
+    volumes:
+      - sql-server-volume:/var/opt/mssql
+      - ./server-init.sh:/server-init.sh
+      - ./db-init.sh:/db-init.sh
+      - ./db-init.sql:/db-init.sql
+
+    command: /bin/bash server-init.sh
+
+volumes: 
+  sql-server-volume:        
+    driver: local

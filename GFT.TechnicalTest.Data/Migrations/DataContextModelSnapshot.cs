@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace GFT.TechnicalTest.Data.Migrations
 {
@@ -19,14 +20,14 @@ namespace GFT.TechnicalTest.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GFT.TechnicalTest.Data.Models.Dishes.Order", b =>
+            modelBuilder.Entity("GFT.TechnicalTest.Data.Models.Dishes.Dish", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
 
                     b.Property<int>("DishType")
                         .HasColumnType("int");
@@ -42,15 +43,12 @@ namespace GFT.TechnicalTest.Data.Migrations
                         .HasColumnType("nvarchar(6)")
                         .HasMaxLength(6);
 
-                    b.Property<int>("Period")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("Id", "Period");
 
                     b.HasIndex("DishType", "Period")
                         .IsUnique();
 
-                    b.ToTable("Order","Dishes");
+                    b.ToTable("Dish", "Dishes");
                 });
 #pragma warning restore 612, 618
         }

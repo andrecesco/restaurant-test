@@ -5,7 +5,7 @@
     /// </summary>
     public enum Period
     {
-        Morning = 0,
-        Night = 1
+        Morning = 1,
+        Night = 2
     }
 }

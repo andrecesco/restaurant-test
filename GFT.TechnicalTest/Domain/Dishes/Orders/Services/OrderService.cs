@@ -46,12 +46,12 @@ namespace GFT.TechnicalTest.Domain.Dishes.Orders.Services
             return new SelectOrder { Data = content };
         }
 
-        private IEnumerable<Order> SelectOrders(CreateOrder createModel)
+        private IEnumerable<Dish> SelectOrders(CreateOrder createModel)
         {
             // Reduces duplicates when checking data on DB
             var filteredIds = createModel.Dishes.ToHashSet();
 
-            return this.Context.Orders
+            return this.Context.Dishes
                        .Where(o => o.Period.Equals(createModel.Period))
                        .Where(o => filteredIds.Contains(o.Id))
                        .ToList();

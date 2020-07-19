@@ -141,4 +141,8 @@
         <TypeScriptMapRoot />
         <TypeScriptSourceRoot />
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="..\.dockerignore" Link="Infra\.dockerignore" />
+    </ItemGroup>
 </Project>
