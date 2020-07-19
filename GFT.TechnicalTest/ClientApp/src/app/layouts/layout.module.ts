@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { OrderModule } from '../domain/dishes/orders/orders.module';
+
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -12,7 +14,9 @@ import { HomeComponent } from './home/home.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+
+    OrderModule
   ],
 
   declarations: [

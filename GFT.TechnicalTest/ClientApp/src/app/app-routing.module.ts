@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MsalGuard } from '@azure/msal-angular';
-
 import { HomeComponent } from './layouts/home/home.component';
 
 const routes: Routes = [
@@ -11,15 +9,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     runGuardsAndResolvers: 'always',
-    canActivate: [MsalGuard],
-    component: HomeComponent,
-
-    children: [
-      {
-        path: 'users',
-        loadChildren: () => import('./domain/frontend/users/users.module').then(m => m.UserModule)
-      }
-    ]
+    component: HomeComponent
   }
 ];
 
@@ -29,15 +19,26 @@ export declare interface RouteInfo {
   rtlTitle: string;
   icon: string;
   class: string;
+  external: boolean;
 }
 
 export const KnownRoutes: RouteInfo[] = [
   {
-    path: '/users',
-    title: 'User',
-    rtlTitle: 'User',
-    icon: 'fa fa-user',
-    class: ''
+    path: '',
+    title: 'Orders',
+    rtlTitle: 'Orders',
+    icon: 'fa fa-receipt',
+    class: '',
+    external: false
+  },
+
+  {
+    path: '/api',
+    title: 'Swagger API',
+    rtlTitle: 'Swagger API',
+    icon: 'fa fa-robot',
+    class: '',
+    external: true
   }
 ];
 

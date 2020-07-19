@@ -233,3 +233,4 @@ _Pvt_Extensions
 /Hiperpass.App/ClientApp/node_modules
 /Hiperpass.App/appsettings.Development.json
 /GFT.TechnicalTest/ClientApp/node_modules
+/GFT.TechnicalTest/ClientApp/dist

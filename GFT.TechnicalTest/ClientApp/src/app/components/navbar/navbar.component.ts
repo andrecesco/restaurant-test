@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,8 @@ import { KnownRoutes, RouteInfo } from '../../app-routing.module';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  @Input() title: string;
+
   private listTitles: RouteInfo[];
   private toggleButton;
   private sidebarVisible: boolean;

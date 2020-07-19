@@ -70,6 +70,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="ClientApp\src\app\domain\dishes\orders\components\order-create\order-create.component.ts" />
+      <None Remove="ClientApp\src\app\domain\dishes\orders\models\form-order.model.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\GFT.TechnicalTest.Data\GFT.TechnicalTest.Data.csproj" />
     </ItemGroup>
 
