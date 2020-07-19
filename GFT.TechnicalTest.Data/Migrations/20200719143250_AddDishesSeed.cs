@@ -12,10 +12,11 @@ namespace GFT.TechnicalTest.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             var columns = new string[] {
-                "Id",
-                "Period",
-                "DishType",
-                "Name",
+                nameof(Dish.Id),
+                nameof(Dish.Period),
+                nameof(Dish.DishType),
+                nameof(Dish.Name),
+                nameof(Dish.Multiple)
             };
 
             var data = new List<Dish> {
@@ -29,7 +30,7 @@ namespace GFT.TechnicalTest.Data.Migrations
                 new Dish{ Id=4, Period = Period.Night, DishType = DishType.Dessert, Name="cake" }
             };
 
-            var values = data.Select(item => new object[] { item.Id, (int)item.Period, (int)item.DishType, item.Name })
+            var values = data.Select(item => new object[] { item.Id, (int)item.Period, (int)item.DishType, item.Name, item.Multiple })
                 .ToArray();
 
             foreach (var value in values)
