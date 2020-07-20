@@ -25,14 +25,16 @@
                      [ngClass]="{ 'is-invalid': submitted && f.order.errors }" />
             </div>
           </div>
+
           <div class="col-12">
             <div class="form-group">
-              <label for="order">Order Result</label>
+              <label for="order">Last Order</label>
 
               <input class="form-control"
                      id="order-result"
                      placeholder="Order result goes here"
                      type="text"
+                     disabled="disabled"
                      [value]="orderResult" />
             </div>
           </div>
