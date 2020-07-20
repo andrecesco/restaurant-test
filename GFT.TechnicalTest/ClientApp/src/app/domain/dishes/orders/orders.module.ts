@@ -10,8 +10,8 @@ import { CommonsModule } from '../../commons/commons.module';
 import { OrderService } from './services/order.service';
 
 import { OrderListComponent } from './components/order-list/order-list.component';
-
 import { OrderCreateComponent } from './components/order-create/order-create.component';
+import { OrderIndexComponent } from './components/order-index/order-index.component';
 
 @NgModule({
   imports: [
@@ -27,12 +27,14 @@ import { OrderCreateComponent } from './components/order-create/order-create.com
 
   declarations: [
     OrderListComponent,
-    OrderCreateComponent
+    OrderCreateComponent,
+    OrderIndexComponent
   ],
 
   exports: [
     OrderListComponent,
-    OrderCreateComponent
+    OrderCreateComponent,
+    OrderIndexComponent
   ],
 
   providers: [

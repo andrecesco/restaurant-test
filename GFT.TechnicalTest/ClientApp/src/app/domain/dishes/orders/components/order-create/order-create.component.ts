@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -9,7 +8,6 @@ import { subscriptionCleaner } from '../../../../commons/tools.utils';
 import { OrderService } from '../../services/order.service';
 
 import { FormOrder, CreateOptions, CreateValidations } from '../../models/form-order.model';
-import { SelectOrder } from '../../models/select-order.model';
 
 @Component({
   selector: 'app-order-create',
@@ -17,6 +15,8 @@ import { SelectOrder } from '../../models/select-order.model';
   styleUrls: ['./order-create.component.scss']
 })
 export class OrderCreateComponent implements OnInit, OnDestroy {
+  @Output() orderCreate: EventEmitter<any> = new EventEmitter();
+
   public orderForm: FormGroup;
   public loadingForm = false;
   public submitted = false;
@@ -52,7 +52,10 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
       subscriptionCleaner(this.dataSubscription);
 
       this.dataSubscription = this.orderService.create(formData)
-        .subscribe(result => this.orderResult = result.data);
+        .subscribe(result => {
+          this.orderResult = result.data;
+          this.orderCreate.emit(null);
+        });
     }
   }
 }
