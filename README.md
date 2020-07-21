@@ -1,4 +1,4 @@
-﻿# # Restaurant
+# # Restaurant
 Welcome to the Restaurant.
 
 ## Introduction
@@ -35,5 +35,6 @@ Docker will spin the Server and Database containers for you:
 
 - The application should be available at `localhost:8443`.
   - Also, there is a `Swagger` page at `localhost:8443/api`
+  - Because of the Angular CLI used by the .Net environment, is possible the web page displays an error when running the server. A simple refresh or a `F5` will force the server to reload the page and display correctly. This is due a non-configurable timeout during the server start up phase. 
 - A local instance of SQL Server should start at  `localhost:1443`. The user is set as `SA` and the password is the `DB_PASSWORD ` environment variable.
 
