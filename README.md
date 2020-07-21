@@ -1,4 +1,4 @@
-# # Restaurant
+# Restaurant
 Welcome to the Restaurant.
 
 ## Introduction
@@ -25,6 +25,11 @@ You must set up the following variables:
   - This password must adhere to the [SQL Server Password Strength](https://docs.microsoft.com/en-us/sql/relational-databases/policy-based-management/sql-server-login-password-strength?view=sql-server-ver15)
 
 ## Running
+
+Once the project is cloned, the following commands must be run:
+
+- `dotnet restore` at the project root to ensure all `Nuget` packages are downloaded
+- `npm install` at the `Restaurant.Server\ClientApp` folder in order to install all `javascript` packages
 
 The application is set up in a way that all database migrations will run when the server starts.
 

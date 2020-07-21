@@ -9,10 +9,20 @@ using System.Linq;
 
 namespace Restaurant.Domain.Dishes.Orders.Services
 {
+    /// <summary>
+    /// Handles all operations over <see cref="Dish"/> orders
+    /// </summary>
     public sealed class OrderService : IOrderService
     {
         #region Constants
+        /// <summary>
+        /// Separator used at inputs to separate items
+        /// </summary>
         private const string Separator = ", ";
+
+        /// <summary>
+        /// String used to display errors during processing
+        /// </summary>
         private const string ErrorName = "error";
         #endregion
 
@@ -27,6 +37,11 @@ namespace Restaurant.Domain.Dishes.Orders.Services
         }
         #endregion
 
+        /// <summary>
+        /// Makes an order based on the input
+        /// </summary>
+        /// <param name="createModel">Order input</param>
+        /// <returns>Processed order</returns>
         public SelectOrder MakeOrder(CreateOrder createModel)
         {
             if (createModel is null)

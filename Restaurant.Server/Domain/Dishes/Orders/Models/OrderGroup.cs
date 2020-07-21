@@ -7,9 +7,15 @@ using System.Linq;
 
 namespace Restaurant.Domain.Dishes.Orders.Models
 {
+    /// <summary>
+    /// Groups <see cref="CreateOrder.Dishes"/> and processes the group into <see cref="ProcessingOrder"/>
+    /// </summary>
     public sealed class OrderGroup : IGrouping<int, int>, IEquatable<OrderGroup>
     {
         #region Constants
+        /// <summary>
+        /// String used to display errors during processing
+        /// </summary>
         private const string ErrorName = "error";
         #endregion
 
@@ -74,6 +80,11 @@ namespace Restaurant.Domain.Dishes.Orders.Models
         #endregion
 
         #region Processing
+        /// <summary>
+        /// Processes all dishes into order items
+        /// Checks for item multiplicity and count
+        /// </summary>
+        /// <returns><see cref="ProcessingOrder"/> items processed</returns>
         public IEnumerable<ProcessingOrder> Process()
         {
             var result = new List<ProcessingOrder>();

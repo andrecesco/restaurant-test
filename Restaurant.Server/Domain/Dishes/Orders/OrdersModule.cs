@@ -6,6 +6,10 @@ using Restaurant.Domain.Dishes.Orders.Validations;
 
 namespace Restaurant.Domain.Dishes.Orders
 {
+    /// <summary>
+    /// Registers all components necessary to have the Order Module working
+    /// <see cref="Module"/>
+    /// </summary>
     public sealed class OrdersModule : Module
     {
         protected override void Load(ContainerBuilder builder)

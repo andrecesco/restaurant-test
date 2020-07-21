@@ -3,6 +3,9 @@ using Restaurant.Domain.Dishes.Orders.Models;
 
 namespace Restaurant.Domain.Dishes.Orders.Validations
 {
+    /// <summary>
+    /// Validates <see cref="CreateOrder"/> models
+    /// </summary>
     public sealed class CreateOrderValidator : AbstractValidator<CreateOrder>
     {
         #region Constructors
