@@ -12,11 +12,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - DB_CONNECTION_STRING=Server=database;Database=gft-data;User Id=SA;Password=Passw0rd(!)
+      - DB_CONNECTION_PASSWORD=${DB_PASSWORD:-"Passw0rd(!)"}
+      - DB_CONNECTION_STRING=Server=database;Database=gft-data;User Id=SA;Password=${DB_PASSWORD:-"Passw0rd(!)"}
       
     ports:
-      - "80"
-      - "443"
+      - "8080:80"
+      - "8443:443"
 
     build:
       context: .
@@ -35,8 +36,8 @@ services:
 
     environment: 
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Passw0rd(!)
-      - MSSQL_SA_PASSWORD=Passw0rd(!)
+      - SA_PASSWORD=${DB_PASSWORD:-"Passw0rd(!)"}
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD:-"Passw0rd(!)"}
 
     volumes:
       - sql-server-volume:/var/opt/mssql
