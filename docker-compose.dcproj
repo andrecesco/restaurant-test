@@ -6,8 +6,9 @@
     <ProjectGuid>c850010d-05b8-4e9d-8003-6fc1832413fa</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>gft.technicaltest</DockerServiceName>
+    <DockerServiceName>restaurantserver</DockerServiceName>
   </PropertyGroup>
+  
   <ItemGroup>
     <None Include="db-init.sh" />
     <None Include="db-init.sql" />

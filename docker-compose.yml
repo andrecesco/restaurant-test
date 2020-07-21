@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  gft.technicaltest:
+  restaurantserver:
     depends_on:
       - database
 
-    image: ${DOCKER_REGISTRY-}gfttechnicaltest
-    container_name: gft.technicaltest
+    image: ${DOCKER_REGISTRY-}restaurantserver
+    container_name: restaurantserver
     restart: always
 
     environment:
@@ -20,7 +20,7 @@ services:
 
     build:
       context: .
-      dockerfile: GFT.TechnicalTest/Dockerfile
+      dockerfile: Restaurant.Server/Dockerfile
 
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

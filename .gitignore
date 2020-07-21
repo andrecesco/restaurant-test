@@ -234,3 +234,5 @@ _Pvt_Extensions
 /Hiperpass.App/appsettings.Development.json
 /GFT.TechnicalTest/ClientApp/node_modules
 /GFT.TechnicalTest/ClientApp/dist
+/Restaurant.Server/ClientApp/dist
+/Restaurant.Server/ClientApp/node_modules
